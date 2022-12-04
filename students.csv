@@ -1,21 +1,21 @@
 id,name,midterm,final,assignment_1,assinment_2,assignment_3,team_name,team_project
 111111,John Doe,80,94,20,20,18,team_a,60
 111112,Jane Smith,75,100,20,16,20,team_a,60
-111113,Sarah Thomas,60,50,20,15,20,team_a,60
+111113,Sarah Thomas,60,50,20,14,20,team_a,60
 111114,Frank Brown,70,74,20,20,16,team_a,60
 111115,Mike Davis,62,48,20,20,16,team_b,50
 111116,Jennifer Wilson,70,80,20,20,20,team_b,50
-111117,Jessica Garcia,68,66,20,15,20,team_b,50
+111117,Jessica Garcia,68,66,20,14,20,team_b,50
 111118,Fred Clark,82,78,18,20,16,team_b,50
 111119,Bob Lopez,90,88,20,20,20,team_c,44
 111120,Jeong Lee,76,90,16,18,20,team_c,44
-111121,Wang Tan,90,95,20,20,18,team_c,44
-111122,Nick Krammer,75,60,18,18,14,team_c,44
+111121,Wang Tan,90,94,20,20,18,team_c,44
+111122,Nick Krammer,74,60,18,18,14,team_c,44
 111123,Minsu Kim,50,54,18,16,18,team_d,56
-111124,Ben Paul,80,75,20,16,20,team_d,56
+111124,Ben Paul,80,74,20,16,20,team_d,56
 111125,Abraham Matthew,90,70,20,20,18,team_d,56
 111126,Jane Cast,100,82,20,20,16,team_d,56
-111127,Sasara Kaga,88,78,15,20,20,team_e,48
+111127,Sasara Kaga,88,78,16,20,20,team_e,48
 111128,Zac Frost,50,68,12,20,18,team_e,48
 111129,Kate Wise,48,76,12,18,20,team_e,48
 111130,Eun Jung,66,78,18,18,16,team_e,48
