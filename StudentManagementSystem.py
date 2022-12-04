@@ -1,16 +1,17 @@
-import pandas as pd
-
 class CS22B:
     students = []
     def __init__(self, prof, data):
-        print()
         self.prof = prof
-        self.data = data
         self.head = data[0].strip().split(",")
-
-        for line in data[1:]:             # future concern: no function to adjust along the column name
+        self.data = data[1:]
+        print(self.data)
+        for line in self.data:             # future concern: no function to adjust along the column name
             line = line.strip().split(",")
-            self.students.append(Student(id = line[0], name = line[1], midterm = int(line[2]), final = int(line[3]), ass1 = int(line[4]), ass2 = int(line[5]), ass3 = int(line[6]), team_name = line[7], teamproject_grade = int(line[8])))
+            print(line)
+            self.students.append(Student(line[0], line[1], int(line[2]), int(line[3]), int(line[4]), int(line[5]), int(line[6]), line[7], int(line[8])))
+        for s in self.students:
+            print(s.getName())
+            print(s.getGrade('teamproject'))
 
     def rewrite(self):
         self.data = []
@@ -77,7 +78,8 @@ class CS22B:
 class Grade:
     full_grade = 0
 
-    def __init__(self, grade):
+    def __init__(self, title, grade):
+        self.title = title
         self.grade = grade
 
     def getGrade(self):
@@ -94,17 +96,17 @@ class Grade:
 class Student:
     grades = {}
     assignments = []
-    def __init__(self, name, id, midterm, final, ass1, ass2, ass3, teamproject_grade, team_name):
+    def __init__(self,id,name, midterm, final, ass1, ass2, ass3, team_name,teamproject_grade):
         self.name = name
         self.id = id
-        self.grades["midterm"] = Grade(midterm)
-        self.grades["final"] = Grade(final)
-        self.grades["ass1"] = Grade(ass1)
-        self.grades["ass2"] = Grade(ass2)
-        self.grades["ass3"] = Grade(ass3)
-
-        self.grades["teamproject"] = Grade(teamproject_grade)
+        self.grades["midterm"] = Grade("midterm", midterm)
+        self.grades["final"] = Grade("final",final)
+        self.grades["ass1"] = Grade("ass1",ass1)
+        self.grades["ass2"] = Grade("ass2",ass2)
+        self.grades["ass3"] = Grade("ass3",ass3)
         self.teamproject = TeamProject(team_name)
+        self.grades["teamproject"] = Grade("teampproject",teamproject_grade)
+
     
     def getId(self):
         return self.id
@@ -181,7 +183,7 @@ DEFAULT = "What do you want to do? Choose and enter a number\n\
 
 def main():
     data = getData(input("Type file name: "))
-    myclass = CS22B(input("Professor name: "),data.readlines())
+    myclass = CS22B(input("Professor name: "), data.readlines())
 
     while(1):
         answer = input(DEFAULT)
