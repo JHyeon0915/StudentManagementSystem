@@ -34,42 +34,45 @@ class CS22B:
     def showSomeData(self, column_name):
         self.rewrite()
 
-        if column_name == "midterm" or column_name == "final" or "ass" in column_name or "teamproject":
+        if column_name == "midterm" or column_name == "final" or "ass" in column_name or column_name == "teamproject":
             for student in self.students:
-                print(student.getName() + ": " + student.getGrade(column_name))
+                print(student.getName() + ":",student.getGrade(column_name), end="\n")
         elif column_name == "id":
             for student in self.students:
-                print(student.getName() +": "+ student.getId())
+                print(student.getName() +": "+ student.getId(), end="\n")
         elif column_name == "teamname":
             for student in self.students:
-                print(student.getName() +" is in "+ student.getTeamName())
-        elif column_name == "name":
-            print()
+                print(student.getName() +" is in "+ student.getTeamName(), end="\n")
+        else:
+            print("No such column name like that.",end="\n")
     
     def printAverage(self,title):
         avg = sum([i.getGrade(title) for i in self.students])/len(self.students)
         print("Average grade of " + title + " is ",avg," / ",self.students[0].getFullGrade(title))
 
-    def getStudentAerage(self, name):
+    def getStudentAverage(self, name):
         for s in self.students:
             if s.getName() == name:
                 grade_dict = s.getAllGrades()
-                print(grade_dict)
-                print("average: " + sum([i.getGrade() for i in grade_dict.values()])/len(grade_dict))
+                for i in grade_dict:
+                    print(i,":",grade_dict[i].getGrade())
+                print(name,"'s average grade:",sum([i.getGrade() for i in grade_dict.values()])/len(grade_dict),end="\n")
+                break
         
     def updateGrade(self, student_name, title, new_grade):
         for student in self.students:
             if student.getName() == student_name:
                 student.setGrade(title, new_grade)
-                print("Successfully updated!")
+                print("Successfully updated!", end="\n")
                 break
+        print("\n")
     
-    def updateGrade(self, teamname, new_grade):
+    def updateTeamGrade(self, teamname, new_grade):
         for student in self.students:
             if student.getTeamName() == teamname:
                 student.setGrade("teamproject", new_grade)
                 print("Successfully Updated " + student.getName()+"'s team project grade!")
-                print("\n")
+        print("\n")
 
 class Grade:
     full_grade = 0
@@ -163,7 +166,8 @@ def getData(filename):
         print("File succesfully uploaded!")
         return d
     except FileNotFoundError:
-        return -1
+        print("File does not exist!")
+        exit(-1)
             
 
 DEFAULT = "What do you want to do? Choose and enter a number\n\
@@ -176,10 +180,7 @@ DEFAULT = "What do you want to do? Choose and enter a number\n\
             7) exit\n"
 
 def main():
-    data = 0
-    while(data > -1):
-        data = getData(input("Type file name: "))
-    
+    data = getData(input("Type file name: "))
     myclass = CS22B(input("Professor name: "),data.readlines())
 
     while(1):
@@ -200,7 +201,7 @@ def main():
         elif answer == "4":
             team_name = input("What team would you like to update a grade for?: ")
             new_grade = input("What would be the new grade?: ")
-            myclass.updateGrade(team_name, new_grade)
+            myclass.updateTeamGrade(team_name, new_grade)
         
         elif answer == "5":
             title = input("What type of average of grade would you like to see? (final / midterm / assignemnt name / teamproject): ")
@@ -208,7 +209,7 @@ def main():
 
         elif answer == "6":
             student_name = input("Who would you like to get the average score of?: ")
-            myclass.getStudentAverage()
+            myclass.getStudentAverage(student_name)
 
         elif answer=="7":
             print("Thank you for using this program! See you again!")
