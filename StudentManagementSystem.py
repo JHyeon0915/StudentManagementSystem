@@ -1,16 +1,15 @@
 class CS22B:
-    students = []
     def __init__(self, prof, data):
+        self.students = []
         self.prof = prof
         self.head = data[0].strip().split(",")
-        self.data = data[1:]
 
-        for line in self.data:             # future concern: no function to adjust along the column name
+        for line in data[1:]:               # future concern: no function to adjust along the column name
             line = line.strip().split(",")
-            CS22B.students.append(Student(line[0], line[1], int(line[2]), int(line[3]), int(line[4]), int(line[5]), int(line[6]), line[7], int(line[8])))
+            self.students.append(Student(line[0], line[1], int(line[2]), int(line[3]), int(line[4]), int(line[5]), int(line[6]), line[7], int(line[8])))
             
     def showAllData(self):
-        for s in Student.students:
+        for s in self.students:
             print(self.head[0],":",s.getId(),end=", ")
             print(self.head[1],":",s.getName(),end=", ")
             print(self.head[2],":",s.getGrade("midterm"),end=", ")
@@ -66,25 +65,23 @@ class CS22B:
         print("\n")
 
 class Grade:
-    full_grade = 0
-
     def __init__(self, grade):
+        self.full_grade = 0
         self.grade = grade
 
-    def getAGrade(self):
+    def getGrade(self):
         return self.grade
 
-    def setAGrade(self, new_grade):
+    def setGrade(self, new_grade):
         self.grade = new_grade
 
     def getFullGrade(self):
-        if Grade.full_grade == 0:
+        if self.full_grade == 0:
             return int(input("You have not set full_grade. Enter the full grade. "))
-        return Grade.full_grade
+        return self.full_grade
 
 class Student:
     def __init__(self,id,name, midterm, final, ass1, ass2, ass3, team_name,teamproject_grade):
-        print("I got",id,name,midterm,final,ass1,ass2,ass3,team_name,teamproject_grade)
         self.name = name
         self.id = id
         self.grades = {}
@@ -102,10 +99,10 @@ class Student:
         return self.name
 
     def getGrade(self, title):
-        return self.grades[title].getAGrade()
+        return self.grades[title].getGrade()
 
     def setGrade(self, title, new_grade):
-        self.grades[title].setAGrade(new_grade)
+        self.grades[title].setGrade(new_grade)
     
     def getTeamName(self):
         return self.grades["teamproject"].getTeamName()
@@ -152,7 +149,7 @@ def getData(filename):
 
 DEFAULT = "What do you want to do? Choose and enter a number\n\
             1) show all data\n\
-            2) search a student's data\n\
+            2) search a data\n\
             3) update a exam / an assignment grade\n\
             4) update team project grade\n\
             5) get average of a exam / an assignment\n\
@@ -169,7 +166,7 @@ def main():
             myclass.showAllData()
 
         elif answer == "2":
-            column_name = input("What column of data would you like to see?: ")
+            column_name = input("What column of data would you like to see? (id, name, final, midterm, assignment name, team_name, teamproject): ")
             myclass.showSomeData(column_name)
 
         elif answer == "3":
